@@ -1,10 +1,18 @@
+import Widget
 import unittest
 
-class DefaultWidgetSizeTestCase(unittest.TestCase):
+class SimpleWidgetTestCase(unittest.TestCase):
+  def setUp(self):
+    self.widget = Widget.Widget()
+
+class DefaultWidgetSizeTestCase(SimpleWidgetTestCase):
   def runTest(self):
-    widget = Widget("The widget")
-    assert widget.size() == (50, 50), 'incorrect default size'
+    assert self.widget.getSize() == (40, 40), 'incorrect default size'
+
+class WidgetResizeTestCase(SimpleWidgetTestCase):
+  def runTest(self):
+    self.widget.resize(100, 150)
+    assert self.widget.getSize() == (100, 150), 'wrong size after resize'
 
 if __name__ == "__main__":
-  testCase = DefaultWidgetSizeTestCase()
-
+  unittest.main()
